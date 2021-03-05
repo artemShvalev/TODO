@@ -2,16 +2,24 @@
   <v-app app>
     <v-main>
       <v-container>
-          <v-text-field placeholder="Введите задачу" color="green" prepend-icon="mdi-message">
+          <v-text-field v-model.trim="newTask" placeholder="Введите задачу" color="green" prepend-icon="mdi-message">
           </v-text-field>
-        <v-btn class="pl-9 mx-auto" color="yellow" text plain large>
+        <v-btn
+          @click.prevent="newTodo"
+          class="pl-9 mx-auto"
+          color="yellow"
+          text
+          plain
+          large
+          :disabled="disabled"
+        >
           Добавить задачу
         </v-btn>
         <v-icon left color="red" class="pl-1">mdi-plus</v-icon>
         <!-- Здесь итеррировать v card -->
-        <v-card>
+        <v-card v-for="(todos, id) in todo" :key="id">
           <v-list>
-            Привет как дела?
+            {{ todos }}
             <v-btn
               class="mx-2"
               fab
@@ -33,5 +41,28 @@
 <script>
 
 export default {
+  data()  {
+    return {
+      todo: [],
+      newTask: '',
+      disabled: true
+    }
+  },
+  methods: {
+    newTodo() {
+      this.todo.push(this.newTask)
+      this.newTask = ''
+    }
+  },
+  watch: {
+    newTask () {
+      if (this.newTask !== '') {
+        console.log(this.disabled)
+        this.disabled = false
+      } else {
+        this.disabled = true
+      }
+    }
+  }
 }
 </script>
