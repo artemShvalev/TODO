@@ -17,10 +17,11 @@
         </v-btn>
         <v-icon left color="red" class="pl-1">mdi-plus</v-icon>
         <!-- Здесь итеррировать v card -->
-        <v-card v-for="(todos, id) in todo" :key="id">
+        <v-card v-for="(todos, index) in todo" :key="index">
           <v-list>
             {{ todos }}
             <v-btn
+              @click="removeTask(index)"
               class="mx-2"
               fab
               dark
@@ -45,13 +46,18 @@ export default {
     return {
       todo: [],
       newTask: '',
-      disabled: true
+      disabled: true,
+      index: 1,
     }
   },
   methods: {
     newTodo() {
       this.todo.push(this.newTask)
       this.newTask = ''
+    },
+    removeTask(index) {
+      this.todo.splice(index,1)
+      console.log(index)
     }
   },
   watch: {
