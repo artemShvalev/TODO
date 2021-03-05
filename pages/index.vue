@@ -15,7 +15,18 @@
         >
           Добавить задачу
         </v-btn>
-        <v-icon left color="red" class="pl-1">mdi-plus</v-icon>
+        <v-btn text>
+          <v-icon
+            @click.prevent="newTodo"
+            :disabled="disabled"
+            left
+            color="red"
+            class="pl-1"
+            x-large
+            >
+            mdi-plus
+          </v-icon>
+        </v-btn>
         <!-- Здесь итеррировать v card -->
         <v-card v-for="(todos, index) in todo" :key="index">
           <v-list>
