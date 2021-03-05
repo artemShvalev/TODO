@@ -20,7 +20,7 @@
             @click.prevent="newTodo"
             :disabled="disabled"
             left
-            color="red"
+            color="#CDDC39"
             class="pl-1"
             x-large
             >
@@ -46,11 +46,17 @@
           </v-list>
         </v-card>
       </v-container>
+      <v-spacer />
+      <v-app-bar-title>Текущих задач: {{ todo.length }}</v-app-bar-title>
     </v-main>
   </v-app>
 </template>
 
 <script>
+  // таймиер (время на выполнеение)
+  // Добавить колл-во задач
+  // Добавить иконку редактирования(карандаш)
+  // Добавить чекбокс выполнена/ не выполнена
 
 export default {
   data()  {
