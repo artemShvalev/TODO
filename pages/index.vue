@@ -28,23 +28,28 @@
           </v-icon>
         </v-btn>
         <!-- Здесь итеррировать v card -->
-        <v-card v-for="(todos, index) in todo" :key="index">
-          <v-list>
+        <v-simple-table fixed-header>
+          <thead>
+        <tr>
+          <th class="text-left">
+            Задача
+          </th>
+            <v-divider vertical></v-divider>
+          <th class="text-left" :id="id">
+             Ожидает завершения
+          </th>
+          <v-divider vertical></v-divider>
+           <th class="text-left">
+           Завершена
+          </th>
+          <v-divider vertical></v-divider>
+        </tr>
+      </thead>
+          <tbody v-for="(todos, index) in todo" :key="index">
             {{ todos }}
-            <v-btn
-              @click="removeTask(index)"
-              class="mx-2"
-              fab
-              dark
-              small
-              color="primary"
-            >
-              <v-icon dark>
-                mdi-minus
-              </v-icon>
-            </v-btn>
-          </v-list>
-        </v-card>
+          </tbody>
+
+        </v-simple-table>
       </v-container>
       <v-spacer />
       <v-app-bar-title>Текущих задач: {{ todo.length }}</v-app-bar-title>
@@ -53,8 +58,8 @@
 </template>
 
 <script>
+  // Сделать таблицу заместо списков
   // таймиер (время на выполнеение)
-  // Добавить колл-во задач
   // Добавить иконку редактирования(карандаш)
   // Добавить чекбокс выполнена/ не выполнена
 
