@@ -1,11 +1,11 @@
 <template>
   <v-app app>
+    <v-app-bar-title class="mt-10">Текущих задач: {{ todo.length }}</v-app-bar-title>
     <v-main>
-      <v-container class="mx-auto">
+      <v-container>
         <v-row>
           <v-col cols="8">
-            <v-text-field v-model.trim="newTask" placeholder="Введите задачу" color="green" prepend-icon="mdi-message">
-          </v-text-field>
+            <v-text-field v-model.trim="newTask" placeholder="Введите задачу" color="green" prepend-icon="mdi-message"/>
         <v-btn
           @click.prevent="newTodo"
           class="pl-9 mx-auto"
@@ -30,38 +30,38 @@
           </v-icon>
         </v-btn>
           </v-col>
-          
         </v-row>
-          
         <v-row>
           <v-col cols="8">
-            <v-simple-table fixed-header dense dark>
+            <v-simple-table fixed-header dense dark height="500">
           <thead>
         <tr>
           <th class="text-left">
             Задача
           </th>
-          <v-divider vertical></v-divider>
-           <th class="text-left">
-           Завершена
-           <v-icon @click="removeTask" color="yellow">mdi-minus</v-icon>
+          <v-divider vertical/>
+          <th v-if="timer">
+            Время: {{currentMinutes}} сек
           </th>
         </tr>
       </thead>
-          <tbody v-for="(todos, index) in todo" :key="index" class="ml-3">
+          <v-divider vertical/>
+          <tbody v-for="(todos, index) in todo" :key="index">
+            <tr>
+              <td @click="removeTask" >
             {{ todos }}
+              </td>
+            </tr>
           </tbody>
         </v-simple-table>
           </v-col>
         </v-row>
-      <v-app-bar-title class="mt-10">Текущих задач: {{ todo.length }}</v-app-bar-title>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-  // Сделать таблицу заместо списков
   // таймиер (время на выполнеение)
   // Добавить иконку редактирования(карандаш)
   // Добавить чекбокс выполнена/ не выполнена
@@ -72,7 +72,8 @@ export default {
       todo: [],
       newTask: '',
       disabled: true,
-      index: 1
+      index: 1,
+      currentMinutes: 60
     }
   },
   methods: {
@@ -87,11 +88,20 @@ export default {
   watch: {
     newTask () {
       if (this.newTask !== '') {
-        console.log(this.disabled)
         this.disabled = false
       } else {
         this.disabled = true
       }
+    }
+  },
+  computed: {
+    timer: function() {
+      setTimeout(() => {
+        for(let i = 61; this.currentMinutes !== 0;  i-- ) {
+          this.currentMinutes
+          console.log(this.currentMinutes)
+        }
+      },1000)
     }
   }
 }
